@@ -1,22 +1,3 @@
-import './lib/db';
-import express from 'express';
-import countryRoutes from './routes/country';
-import userRoutes from './routes/user.route';
+import { App } from './app';
 
-const app = express();
-const port = process.env.PORT || 3333;
-
-app.use(express.json());
-app.use(express.raw({ type: 'application/vnd.custom-type' }));
-app.use(express.text({ type: 'text/html' }));
-
-app.get('/', async (req, res) => {
-  res.json({ message: 'Please visit /countries to view all the countries' });
-});
-
-app.use('/countries', countryRoutes);
-app.use('/user', userRoutes);
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
-});
+new App().getApp();
