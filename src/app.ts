@@ -5,6 +5,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import { InitDB } from './lib/db';
 import userRoute from './routes/user.route';
+import messageRoute from './routes/message.route';
 
 export class App {
     private express: express.Application;
@@ -46,5 +47,6 @@ export class App {
 
     private routes(): void {
         this.express.use('/user', userRoute);
+        this.express.use('/message', messageRoute);
     }
 }
