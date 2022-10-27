@@ -68,6 +68,13 @@ class UserController {
         return res.json(req.userChat);
     }
 
+    /**
+     * It returns a list of users with the last message sent to each user.
+     * @param {Request} req - Request - The request object.
+     * @param {Response} res - Response - The response object that will be returned to the
+     * client.
+     * @returns The list of users with the last message sent.
+     */
     public async list(req: Request, res: Response): Promise<Response> {
         const idUserLogged = req.user?._id;
 
@@ -95,7 +102,15 @@ class UserController {
             })
         );
 
-        return res.json(users);
+        const messageOrden = usersMessage.sort((a, b) => {
+            return (
+                (a.dateLastMessage ? 0 : 1) - (b.dateLastMessage ? 0 : 1) ||
+                -((a.dateLastMessage as Date) > (b.dateLastMessage as Date)) ||
+                +((a.dateLastMessage as Date) < (b.dateLastMessage as Date))
+            );
+        });
+
+        return res.json(messageOrden);
     }
 }
 
