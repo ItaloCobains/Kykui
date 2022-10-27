@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import messageModel from '../models/message.model';
 import userModel from '../models/user.model';
+import messageService from '../services/message.service';
 
 /* It's a class that has two methods, one for sign up and one for authentication */
 class UserController {
@@ -90,25 +91,11 @@ class UserController {
                     .chatSearch(idUserLogged, u._id)
                     .sort('-createdAt')
                     .limit(1)
-                    .map((m) => {
-                        return {
-                            _id: u._id,
-                            name: u.name,
-                            avatar: u.avatar,
-                            lastMessage: m.text ? m.text : null,
-                            dateLastMessage: m.text ? m.createdAt : null
-                        };
-                    });
+                    .map((m) => messageService.getResultMessageUser(u, m));
             })
         );
 
-        const messageOrden = usersMessage.sort((a, b) => {
-            return (
-                (a.dateLastMessage ? 0 : 1) - (b.dateLastMessage ? 0 : 1) ||
-                -((a.dateLastMessage as Date) > (b.dateLastMessage as Date)) ||
-                +((a.dateLastMessage as Date) < (b.dateLastMessage as Date))
-            );
-        });
+        const messageOrden = messageService.returnMessageOrden(usersMessage);
 
         return res.json(messageOrden);
     }
