@@ -54,6 +54,30 @@ class UserController {
             token: user.genarateToken()
         });
     }
+
+    /**
+     * This function is used to get a userChat by its id
+     * @param {Request} req - Request - This is the request object that was sent to the
+     * server.
+     * @param {Response} res - Response - The response object that will be returned to the
+     * client.
+     * @returns The userChat object
+     */
+    public getById(req: Request, res: Response): Response {
+        return res.json(req.userChat);
+    }
+
+    public async list(req: Request, res: Response): Promise<Response> {
+        const idUserLogged = req.user?._id;
+
+        const users = await userModel.find({
+            _id: {
+                $ne: idUserLogged
+            }
+        });
+
+        return res.json(users);
+    }
 }
 
 export default new UserController();
