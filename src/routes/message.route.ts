@@ -12,4 +12,11 @@ messageRoute.post(
     messageController.send
 );
 
+messageRoute.get(
+    '/:id',
+    authMiddleware.authorizeUserByParams,
+    authMiddleware.authorizeUserByToken,
+    messageController.list
+);
+
 export default messageRoute;
