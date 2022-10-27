@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import messageModel from '../models/message.model';
 import userModel from '../models/user.model';
 
 /* It's a class that has two methods, one for sign up and one for authentication */
@@ -75,6 +76,24 @@ class UserController {
                 $ne: idUserLogged
             }
         });
+
+        const usersMessage = await Promise.all(
+            users.map((u) => {
+                return messageModel
+                    .chatSearch(idUserLogged, u._id)
+                    .sort('-createdAt')
+                    .limit(1)
+                    .map((m) => {
+                        return {
+                            _id: u._id,
+                            name: u.name,
+                            avatar: u.avatar,
+                            lastMessage: m.text ? m.text : null,
+                            dateLastMessage: m.text ? m.createdAt : null
+                        };
+                    });
+            })
+        );
 
         return res.json(users);
     }
