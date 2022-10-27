@@ -1,6 +1,9 @@
 import 'dotenv/config';
 import mongoose from 'mongoose';
 
+/**
+ * It connects to the MongoDB database using the MONGO_URL environment variable
+ */
 export const InitDB = async () => {
     if (!process.env.MONGO_URL) {
         throw new Error('Please add the MONGO_URL environment variable');

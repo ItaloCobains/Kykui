@@ -1,5 +1,6 @@
 import { model, Schema } from 'mongoose';
 
+/* Creating a new schema for the message model. */
 const messageSchema = new Schema({
     text: {
         type: String,
