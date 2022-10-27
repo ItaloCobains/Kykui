@@ -2,10 +2,11 @@
 title: ExpressJS Mongoose
 description: An ExpressJS server that connects to a MongoDB database
 tags:
-  - express
-  - mongodb
-  - mongoose
-  - typescript
+    - express
+    - mongodb
+    - mongoose
+    - typescript
+    - clean code
 ---
 
 # ExpressJS Mongoose Example
@@ -16,15 +17,15 @@ This example starts an [ExpressJS](https://expressjs.com/) server that connects 
 
 ## ✨ Features
 
-- Express
-- TypeScript
-- MongoDB with Mongoose
+-   Express
+-   TypeScript
+-   MongoDB with Mongoose
 
 ## 💁‍♀️ How to use
 
-- Install dependencies `yarn`
-- Connect to your Railway project `railway link`
-- Start the development server `railway run yarn dev`
+-   Install dependencies `yarn`
+-   Connect to your Railway project `railway link`
+-   Start the development server `railway run yarn dev`
 
 ## 📝 Notes
 
@@ -32,8 +33,8 @@ The starter contains a single `Country` model that you can read from and write t
 
 There are two main routes on the server:
 
-- A `GET` route - `/countries` which returns all the countries
-- A `POST` route - `/countries` which can be used to add a new country
+-   A `GET` route - `/countries` which returns all the countries
+-   A `POST` route - `/countries` which can be used to add a new country
 
 Example post request to add a new country:
 
